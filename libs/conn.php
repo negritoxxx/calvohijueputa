@@ -6,16 +6,20 @@
     */
     function conexionDB(){
 
-		// PHP Data Objects(PDO) Sample Code:
-		try {
-		    $conn = new PDO("sqlsrv:server = tcp:linea-tres.database.windows.net,1433; Database = linea_tres", "CloudSA5d8172ae", "Negro99012610");
-		    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-		
-		    return $conn;
-		}
-		catch (PDOException $e) {
-		    print("Error connecting to SQL Server.");
-		    die(print_r($e));
+		$servername = "lineaprofutres-server.mysql.database.azure.com";
+		$database = "lineaprofutres-server";
+		$username = "cawuqsfvbu";
+		$password = 'Negro99012610';
+
+		$sql = "mysql:host=$servername;dbname=$database;";
+		$dsn_Options = [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION];
+
+		try { 
+			$my_Db_Connection = new PDO($sql, $username, $password, $dsn_Options);
+			return $my_Db_Connection;
+		} catch (PDOException $error) {
+			echo 'Connection error: ' . $error->getMessage();
+			return NULL;
 		}
 	}
 
