@@ -6,9 +6,9 @@
     */
     function conexionDB(){
 
-		$servername = "20.102.33.6";
+		$servername = "linea-tres.mysql.database.azure.com";
 		$database = "linea_tres";
-		$username = "calvoCabronnn";
+		$username = "calvoCabron";
 		$password = 'Negro99012610';
 
 		$sql = "mysql:host=$servername;dbname=$database;";
