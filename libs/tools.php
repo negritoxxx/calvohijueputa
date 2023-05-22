@@ -297,6 +297,45 @@
 			return false;
 		}
 	}
+
+
+
+	/**
+	*Conocer las llaves deL array Post
+	*
+	*@param $post: array POST del PHP.
+	*/
+	function postInputsEditar($POST){
+
+		$nombres_comparar = ["txtNombre", "txtApellido", "txtDocumento", "btnEditar", "csrf"];
+		
+		if (count($POST) == 5) {
+			
+			foreach ($POST as $key => $value) { 
+				         
+				if (!in_array($key, $nombres_comparar)) {
+						
+					echo '<script>alert("Error al registrar 1");</script>';
+					return false;
+				}
+			}
+
+			if (limitarNombreApellido($POST["txtNombre"], $POST["txtApellido"]) && limitarDocumento($POST["txtDocumento"])) {
+				
+				return true;
+			}
+			else {
+				
+				echo '<script>alert("Error al registrar 2");</script>';
+				return false;
+			}
+		}
+		else {
+			
+			echo '<script>alert("Error al registrar 3");</script>';
+			return false;
+		}
+	}
 	
 
 
@@ -407,6 +446,45 @@
 			return false;
 		}
 	}
+
+
+
+	/**
+	*Conocer las llaves deL array Post
+	*
+	*@param $post: array POST del PHP.
+	*/
+	function postInputsEditarCursos($post){
+
+		$nombres_comparar = ["txtNombreCurso", "numCreditos", "btnEditar", "csrf"];
+		
+		if (count($post) == 4) {
+			
+			foreach ($post as $key => $value) { 
+				         
+				if (!in_array($key, $nombres_comparar)) {
+						
+					echo '<script>alert("Error al registrar 1");</script>';
+					return false;
+				}
+			}
+
+			if (limitarNombreCurso($post["txtNombreCurso"]) && limitarCreditos($post["numCreditos"])) {
+				
+				return true;
+			}
+			else {
+				
+				echo '<script>alert("Error al registrar 2");</script>';
+				return false;
+			}
+		}
+		else {
+			
+			echo '<script>alert("Error al registrar 3");</script>';
+			return false;
+		}
+	}
 		
 
 
@@ -482,6 +560,43 @@
 			}
 
 			if (limitarTipoBusqueda($post["numBusqueda"]) && limitarCodigoBusqueda($post["txtBusqueda"])) {
+				
+				return true;
+			}
+			else {
+				
+				echo '<script>alert("Error al registrar 2");</script>';
+				return false;
+			}
+		}
+		else {
+			
+			echo '<script>alert("Error al registrar 3");</script>';
+			return false;
+		}
+	}
+
+	/**
+	*Conocer las llaves deL array Post
+	*
+	*@param $post: array POST del PHP.
+	*/
+	function postInputsEliminar($post){
+
+		$nombres_comparar = ["numEliminar", "txtBusqueda", "btnEliminar", "csrf"];
+		
+		if (count($post) == 4) {
+			
+			foreach ($post as $key => $value) { 
+				         
+				if (!in_array($key, $nombres_comparar)) {
+						
+					echo '<script>alert("Error al registrar 1");</script>';
+					return false;
+				}
+			}
+
+			if (limitarTipoBusqueda($post["numEliminar"]) && limitarCodigoBusqueda($post["txtBusqueda"])) {
 				
 				return true;
 			}

@@ -40,6 +40,46 @@
             $busqueda = busquedaDB($conn, $_POST["txtBusqueda"], $_POST["numBusqueda"]);   
         }
     }
+
+    if (isset($_POST["btnEliminar"])) {
+        
+        if (postInputsEliminar($_POST)) {
+
+            if(eliminarDB($conn, $_POST["txtBusqueda"], $_POST["numEliminar"])) {
+
+                echo '<script>alert("Eliminado correctamente");</script>';
+            }
+            else {
+                
+                echo '<script>alert("No se pudo eliminar el registro");</script>';
+            }
+        }
+    }
+
+    if (isset($_POST["btnEditar"])) {
+        
+        if (isset($_POST['csrf']) && isset($_POST['txtBusqueda']) && limitarCodigo($_POST['txtBusqueda']) &&
+            isset($_POST['numEditar'])) {
+
+            $_SESSION['editarAlumno'] = $_POST['txtBusqueda'];
+            header('Location: editarAlumno.php'); 
+        }
+    }
+
+    if (isset($_POST["btnEditarCurso"])) {
+        
+        if (isset($_POST['csrf']) && isset($_POST['txtBusqueda']) && limitarCodigoCurso($_POST['txtBusqueda']) &&
+            isset($_POST['numEditar'])) {
+
+            $_SESSION['editarCurso'] = $_POST['txtBusqueda'];
+            header('Location: editarCurso.php'); 
+        }
+    }
+
+    /*
+    Crear variable anti CSRF.
+    */
+    $_SESSION["csrf"] = random_int(1000, 9999);
 ?>
 
 
@@ -51,7 +91,90 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Registro Alumnos</title>
     </head>
+    <style>
+        /* Estilos CSS */
+        body {
+            background-image: url('https://fondosmil.com/fondo/25330.jpg');
+			background-size: cover;
+            background-position: center;
+			background-repeat: no-repeat;
+			min-height: 100vh;
+            background-color: #f2f2f2;
+            font-family: Arial, sans-serif;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 10px;
+            
+        }
+        input[type="text"], select {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+            background-position: left;
+        }
+        input[type="submit"] {
+            background-color: #f44336;
+            color: white;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            float: right;
+        }
+        input[type="submit"]:hover {
+            background-color: #f44336;
+        }
+        table {
+            margin: 3 auto;
+            border-collapse: collapse;
+            width: 100%;
+            max-width: 800px;
+        }
+        th, td {
+            text-align: left;
+            padding: 8px;
+        }
+        tr:nth-child(n){background-color: #f2f2f2}
+        th {
+            background-color: #f44336;
+            color: black;
+        }
+        h2 {
+			text-align: center;
+			margin: 0;
+			margin-bottom: 30px;
+			font-size: 32px;
+			font-weight: bold;
+			color: #333;
+			text-transform: uppercase;
+            color: black;
+            
+		}
+        button[type=submit] {
+            text-align: center;
+			background-color: #f44336;
+			color: #fff;
+			padding: 6px 1px;
+			margin: 4px 0;
+			border: none;
+			border-radius: 4px;
+			cursor: pointer;
+			font-size: 16px;
+			width: 30%;
+			transition: background-color 0.3s ease;
+		}
+    </style>
     <body>
+    <div>
+            <form action="" method="post">
+                <br>
+                <input type="submit" name="logOut" id="logOut" value="Cerrar Sesión">
+            </form>
+        </div>
         <div>
             <h1>Busqueda</h1>
 
@@ -184,7 +307,22 @@
                                             <input type="submit" name="btnBusqueda" id="btnBusqueda" value="Detalles">
                                         </form>
                                     </td>
-
+                                    <td>
+                                        <form action="" method="post">
+                                            <input type="hidden" name="txtBusqueda" id="txtBusqueda" value = "' . $alumnos["codigo"] . '">
+                                            <input type="hidden" name="numEditar" id="numEditar" value = "0">
+                                            <input type="hidden" name="csrf" id="csrf" value = "' . $_SESSION["csrf"] . '">
+                                            <input type="submit" name="btnEditar" id="btnEditar" value="Editar">
+                                        </form>
+                                    </td>
+                                    <td>
+                                        <form action="" method="post">
+                                            <input type="hidden" name="txtBusqueda" id="txtBusqueda" value = "' . $alumnos["codigo"] . '">
+                                            <input type="hidden" name="numEliminar" id="numEliminar" value = "0">
+                                            <input type="hidden" name="csrf" id="csrf" value = "' . $_SESSION["csrf"] . '">
+                                            <input type="submit" name="btnEliminar" id="btnEliminar" value="Eliminar">
+                                        </form>
+                                    </td>
                                 </tr>
                             ';
                         }
@@ -224,7 +362,22 @@
                                             <input type="submit" name="btnBusqueda" id="btnBusqueda" value="Detalles">
                                         </form>
                                     </td>
-
+                                    <td>
+                                        <form action="" method="post">
+                                            <input type="hidden" name="txtBusqueda" id="txtBusqueda" value = "' . $cursos["codigo"] . '">
+                                            <input type="hidden" name="numEditar" id="numEditar" value = "1">
+                                            <input type="hidden" name="csrf" id="csrf" value = "' . $_SESSION["csrf"] . '">
+                                            <input type="submit" name="btnEditarCurso" id="btnEditarCurso" value="Editar">
+                                        </form>
+                                    </td>
+                                    <td>
+                                        <form action="" method="post">
+                                            <input type="hidden" name="txtBusqueda" id="txtBusqueda" value = "' . $cursos["codigo"] . '">
+                                            <input type="hidden" name="numEliminar" id="numEliminar" value = "1">
+                                            <input type="hidden" name="csrf" id="csrf" value = "' . $_SESSION["csrf"] . '">
+                                            <input type="submit" name="btnEliminar" id="btnEliminar" value="Eliminar">
+                                        </form>
+                                    </td>
                                 </tr>
                             ';
                         }
@@ -237,11 +390,6 @@
             <a href="registro.php">Registrar</a>
         </div>
 
-        <div>
-            <form action="" method="post">
-                <br>
-                <input type="submit" name="logOut" id="logOut" value="Cerrar Sesión">
-            </form>
-        </div>
+        
     </body>
 </html>

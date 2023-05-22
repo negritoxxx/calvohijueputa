@@ -34,8 +34,86 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Recuperar Contraseña</title>
     </head>
+    <style>
+		body {
+            
+			background-image: url('https://img3.wallspic.com/crops/2/6/2/3/4/143262/143262-luz_blanca_en_cuarto_oscuro-3840x2160.jpg');
+			background-size: cover;
+			background-position: center;
+			background-repeat: no-repeat;
+			min-height: 100vh;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			font-family: Arial, sans-serif;
+			color: #f2f2f2;
+		}
+		.container {
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			justify-content: center;
+			height: 3vh;
+			background-color: #f2f2f2;
+		}
+		
+		
+		input[type=text], input[type=password] {
+			width: 120%;
+			padding: 12px 20px;
+			margin: 8px 0;
+			box-sizing: border-box;
+			border: 2px solid #ccc;
+			border-radius: 4px;
+			font-size: 16px;
+			color: #f2f2f2;
+		}
+		
+		button[type=submit] {
+            background-position: left;
+			background-color: #4CAF50;
+			color: #fff;
+			padding: 8px 10px;
+			margin: 8px 0;
+			border: none;
+			border-radius: 4px;
+			cursor: pointer;
+			font-size: 16px;
+			width: 120%;
+			transition: background-color 0.3s ease;
+		}
+		button[type=submit]:hover {
+			background-color: #45a049;
+		}
+		
+		label {
+			font-size: 16px;
+			font-weight: bold;
+			color:#f2f2f2;
+			display: block;
+			margin-bottom: 5px;
+			margin-top: 10px;
+			text-transform: uppercase;
+		}
+        a {
+			font-size: 16px;
+			font-weight: bold;
+			color: #f2f2f2;
+			display: block;
+			margin-bottom: 5px;
+			margin-top: 10px;
+			text-transform: uppercase;
+            
+		}
+		h1 {
+            text-align: center;
+            color: #f2f2f2;
+        }
+	</style>
+	
     <body>
-        <div>
+    <br>
+	<div>
             <h1>Recuperar Contraseña</h1>
 
             <form action="" method="post">
@@ -47,10 +125,12 @@
 
                 <input type="hidden" name="csrf" id="csrf" value = "<?php echo $_SESSION["csrf"];?>"><br>
 
-                <input type="submit" name="btnRecovery" id="btnRecovery" value="Registrar">
+                <button type="submit" name="btnRecovery" id="btnRecovery" value="Registrar">Restablecer Contraseña</button>
             </form>
-        </div>
-        <br>
-        <a href="index.php">Login</a>
+			
+			<a href="index.php">Regresar</a>
+       		
+			   <div>
+       
     </body>
 </html>

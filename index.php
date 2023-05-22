@@ -66,6 +66,97 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Inicio</title>
     </head>
+    <style>
+		body {
+			background-image: url('https://img2.wallspic.com/crops/8/3/5/9/6/169538/169538-negro-gris-de_colores-azul-luz-3840x2160.png');
+			background-size: cover;
+			background-position: center;
+			background-repeat: no-repeat;
+			min-height: 100vh;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			font-family: Arial, sans-serif;
+		}
+		.container {
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			justify-content: center;
+			height: 3vh;
+			background-color: #f2f2f2;
+		}
+		h1 {
+			text-align: center;
+			margin: 0;
+			margin-bottom: 30px;
+			font-size: 32px;
+			font-weight: bold;
+			color: #333;
+			text-transform: uppercase;
+            color: #fff;
+            
+		}
+		form {
+			width: 350px;
+			padding: 30px;
+			background-color: #fff;
+			border: 1px solid #ccc;
+			box-shadow: 0 0 10px rgba(0,0,0,0.3);
+			border-radius: 5px;
+			margin-top: 50px;
+		}
+		input[type=text], input[type=password] {
+			width: 100%;
+			padding: 12px 20px;
+			margin: 8px 0;
+			box-sizing: border-box;
+			border: 2px solid #ccc;
+			border-radius: 4px;
+			font-size: 16px;
+		}
+		button[type=submit] {
+            background-position: left;
+			background-color: #4CAF50;
+			color: #fff;
+			padding: 8px 10px;
+			margin: 8px 0;
+			border: none;
+			border-radius: 4px;
+			cursor: pointer;
+			font-size: 16px;
+			width: 100%;
+			transition: background-color 0.3s ease;
+		}
+		button[type=submit]:hover {
+			background-color: #45a049;
+		}
+		span {
+			color: red;
+			font-size: 14px;
+			margin-top: 5px;
+			display: block;
+		}
+		label {
+			font-size: 16px;
+			font-weight: bold;
+			color: #333;
+			display: block;
+			margin-bottom: 5px;
+			margin-top: 10px;
+			text-transform: uppercase;
+		}
+        a {
+			font-size: 16px;
+			font-weight: bold;
+			color: #333;
+			display: block;
+			margin-bottom: 5px;
+			margin-top: 10px;
+			text-transform: uppercase;
+            color: rgb(8, 8, 8);
+		}
+	</style>
     <body>
         <main>
             <h1>Login</h1>
@@ -78,9 +169,11 @@
 
                 <input type="hidden" name="csrf" id="csrf" value = "<?php echo $_SESSION["csrf"];?>">
 
-                <input type="submit" name="btnLogin" id="btnLogin" value="Login">
-            </form>
+                <button type="submit" name="btnLogin" id="btnLogin" value="Login">Ingresar</button>
+                </form>
+            <div class="container">
             <a href="recovery.php">Recuperar Contraseña</a>
+            </div>
         </main>
     </body>
 </html>

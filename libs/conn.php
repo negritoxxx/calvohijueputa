@@ -220,6 +220,87 @@
 
 
     /**
+	*Realiza la edición de un alumno.
+	*
+    *@param $conexion: Conexión PDO para la base de datos.
+    *@param $codigo: código único del usuario.
+	*/
+    function editarAlumnoDB($conexion, $codigo, $nombre, $apellido, $documento){
+    
+        $edicion_alumno = $conexion->prepare("UPDATE users SET nombre = :nombre, apellido = :apellido, 
+                                                documento = :documento 
+                                                WHERE codigo = :codigo");
+        $edicion_alumno->bindParam(":nombre", $nombre, PDO::PARAM_STR);
+        $edicion_alumno->bindParam(":apellido", $apellido, PDO::PARAM_STR);
+        $edicion_alumno->bindParam(":documento", $documento, PDO::PARAM_STR);
+        $edicion_alumno->bindParam(":codigo", $codigo, PDO::PARAM_STR);
+        
+        if ($edicion_alumno->execute()) {
+                
+            return true;
+        } else {
+            
+            return false;
+        }
+    }
+
+
+
+    /**
+	*Realiza la edición de un curso.
+	*
+    *@param $conexion: Conexión PDO para la base de datos.
+    *@param $codigoCurso: código único del curso.
+	*/
+    function editarCursoDB($conexion, $codigoCurso, $nombre, $creditos){
+    
+        $edicion_curso = $conexion->prepare("UPDATE curso SET nombre = :nombre, creditos = :creditos
+                                                WHERE codigo = :codigo");
+        $edicion_curso->bindParam(":nombre", $nombre, PDO::PARAM_STR);
+        $edicion_curso->bindParam(":creditos", $creditos, PDO::PARAM_INT);
+        $edicion_curso->bindParam(":codigo", $codigoCurso, PDO::PARAM_STR);
+        $edicion_curso->execute();
+
+        return true;
+    }
+    /**
+	*Realiza el borrado de un curso o un alumno.
+	*
+    *@param $conexion: Conexión PDO para la base de datos.
+    *@param $codigo: código único del usuario o curso a mostrar sus datos.
+    *@param $opncion: define si la busqueda es un alumno o un curso.
+	*/
+    function eliminarDB($conexion, $codigo, $opcion){
+        if ($opcion  == 0) {
+            
+            $busqueda_alumno = $conexion->prepare("DELETE FROM users WHERE codigo = :codigo AND privilegios = '0'");
+            $busqueda_alumno->bindParam(":codigo", $codigo, PDO::PARAM_STR);
+
+            if ($busqueda_alumno->execute()) {
+                
+                return true;
+            } else {
+                
+                return false;
+            }
+        }else{
+
+            $busqueda_curso = $conexion->prepare("DELETE FROM curso WHERE codigo = :codigo");
+            $busqueda_curso->bindParam(":codigo", $codigo, PDO::PARAM_STR);
+            
+            if ($busqueda_curso->execute()) {
+                
+                return true;
+            } else {
+                
+                return false;
+            }
+        }
+    }
+
+
+
+    /**
 	*Muestra lows cursos a los cuales esta inscrito el alumno.
 	*
     *@param $conexion: Conexión PDO para la base de datos.
