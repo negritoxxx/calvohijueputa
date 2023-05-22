@@ -14,13 +14,15 @@
 		$sql = "mysql:host=$servername;dbname=$database;";
 		$dsn_Options = [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION];
 
-		try { 
+	    	$my_Db_Connection = new PDO($sql, $username, $password, $dsn_Options);
+		return $my_Db_Connection;
+		/*try { 
 			$my_Db_Connection = new PDO($sql, $username, $password, $dsn_Options);
 			return $my_Db_Connection;
 		} catch (PDOException $error) {
 			echo 'Connection error: ' . $error->getMessage();
 			return NULL;
-		}
+		}*/
 	}
 
 
