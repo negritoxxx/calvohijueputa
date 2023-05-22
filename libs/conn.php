@@ -6,7 +6,7 @@
     */
     function conexionDB(){
 
-		$servername = "asdsadsad";
+		$servername = "20.102.33.6";
 		$database = "linea_tres";
 		$username = "calvoCabronnn";
 		$password = 'Negro99012610';
