@@ -5,10 +5,10 @@
     *
     */
     function conexionDB(){
-		$servername = "localhost";
+		$servername = "linea-tres.mysql.database.azure.com";
 		$database = "linea_tres";
-		$username = "root";
-		$password = '1234';
+		$username = "calvoCabron";
+		$password = 'Negro99012610';
 
 		$sql = "mysql:host=$servername;dbname=$database;";
 		$dsn_Options = [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION];
